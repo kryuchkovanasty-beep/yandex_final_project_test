@@ -8,12 +8,14 @@ import sender_stand_request
 
 @pytest.fixture
 def track():
+    # Подготовка данных
     response_create = sender_stand_request.post_new_order(data.order_body)
     return response_create.json()["track"]
 
 
 def test_get_order_by_track(track):
-    #Проверяет, что по треку заказа можно получить данные о заказе.
+    # Проверяет успешное получение заказа по его треку.
     response_get = sender_stand_request.get_order_by_track(track)
 
+# Проверка
     assert response_get.status_code == 200
